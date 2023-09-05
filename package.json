@@ -1,6 +1,6 @@
 {
-	"name": "aicommits",
-	"version": "0.0.0-semantic-release",
+	"name": "@rconjoe/aicommits",
+	"version": "0.0.1",
 	"description": "Writes your git commit messages for you with AI",
 	"keywords": [
 		"ai",
@@ -8,7 +8,7 @@
 		"commit"
 	],
 	"license": "MIT",
-	"repository": "Nutlope/aicommits",
+	"repository": "rconjoe/aicommits",
 	"author": "Hassan El Mghari (@nutlope)",
 	"type": "module",
 	"files": [
