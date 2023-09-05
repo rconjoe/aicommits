@@ -2,9 +2,9 @@ import type { CommitType } from './config.js';
 
 const commitTypeFormats: Record<CommitType, string> = {
 	'': '<commit message>',
-	conventional: '<type>(<optional scope>): <commit message>',
+	conventional: '<type>(<scope>): <commit message>',
 };
-const specifyCommitFormat = (type: CommitType) => `The output response must be in format:\n${commitTypeFormats[type]}`;
+const specifyCommitFormat = (type: CommitType) => `The output response must be in format:\n${commitTypeFormats[type]}. the scope should always be the 'name' value from the nearest project.json file, if it exists.`;
 
 const commitTypes: Record<CommitType, string> = {
 	'': '',
@@ -17,10 +17,11 @@ const commitTypes: Record<CommitType, string> = {
 	 * Conventional Changelog:
 	 * https://github.com/conventional-changelog/conventional-changelog/blob/d0e5d5926c8addba74bc962553dd8bcfba90e228/packages/conventional-changelog-conventionalcommits/writer-opts.js#L182-L193
 	 */
-	conventional: `Choose a type from the type-to-description JSON below that best describes the git diff:\n${
-		JSON.stringify({
+	conventional: `Choose a type from the type-to-description JSON below that best describes the git diff:\n${JSON.stringify(
+		{
 			docs: 'Documentation only changes',
-			style: 'Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)',
+			style:
+				'Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)',
 			refactor: 'A code change that neither fixes a bug nor adds a feature',
 			perf: 'A code change that improves performance',
 			test: 'Adding missing tests or correcting existing tests',
@@ -30,8 +31,10 @@ const commitTypes: Record<CommitType, string> = {
 			revert: 'Reverts a previous commit',
 			feat: 'A new feature',
 			fix: 'A bug fix',
-		}, null, 2)
-	}`,
+		},
+		null,
+		2,
+	)}`,
 };
 
 export const generatePrompt = (
@@ -45,4 +48,6 @@ export const generatePrompt = (
 	'Exclude anything unnecessary such as translation. Your entire response will be passed directly into git commit.',
 	commitTypes[type],
 	specifyCommitFormat(type),
-].filter(Boolean).join('\n');
+]
+	.filter(Boolean)
+	.join('\n');
