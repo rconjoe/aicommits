@@ -1,6 +1,6 @@
 {
 	"name": "@rconjoe/aicommits",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Writes your git commit messages for you with AI",
 	"keywords": [
 		"ai",
@@ -9,7 +9,7 @@
 	],
 	"license": "MIT",
 	"repository": "rconjoe/aicommits",
-	"author": "Hassan El Mghari (@nutlope)",
+	"author": "Hassan El Mghari (@nutlope), Joe Carlton<@rconjoe>",
 	"type": "module",
 	"files": [
 		"dist"
@@ -24,7 +24,7 @@
 		"lint": "eslint --cache .",
 		"type-check": "tsc",
 		"test": "tsx tests",
-		"prepack": "pnpm build && clean-pkg-json"
+		"prepack": "pnpm build"
 	},
 	"simple-git-hooks": {
 		"pre-commit": "pnpm lint-staged"
@@ -67,6 +67,12 @@
 				"files": "./src/commands/prepare-commit-msg-hook.ts",
 				"rules": {
 					"unicorn/prevent-abbreviations": "off"
+				}
+			},
+			{
+				"files": "./src/**/*.ts",
+				"rules": {
+					"max-len": "off"
 				}
 			}
 		]
