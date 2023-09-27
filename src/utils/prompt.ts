@@ -1,10 +1,10 @@
 import type { CommitType } from './config.js';
 
-// const commitTypeFormats: Record<CommitType, string> = {
-// 	'': '<commit message>',
-// 	conventional: '<type>(<scope>): <commit message>',
-// };
-// const specifyCommitFormat = (type: CommitType) => 'The output response must be in format:\n\'<type>(<scope>): <commit message>\'. the scope should always be the \'name\' value from the nearest project.json file, if it exists. Otherwise, use the name of the directory that holds the nearest \'package.json\' file.';
+const commitTypeFormats: Record<CommitType, string> = {
+	'': '<commit message>',
+	conventional: '<type>(<scope>): <commit message>',
+};
+const specifyCommitFormat = (type: CommitType) => `The output response must be in format:\n${commitTypeFormats[type]}. the scope should always be the 'name' value from the nearest project.json file, if it exists. Otherwise, use the name of the directory that holds the nearest 'package.json' file.`;
 
 const commitTypes: Record<CommitType, string> = {
 	'': '',
@@ -47,7 +47,7 @@ export const generatePrompt = (
 	`Commit message must be a maximum of ${maxLength} characters.`,
 	'Exclude anything unnecessary such as translation. Your entire response will be passed directly into git commit.',
 	commitTypes[type],
-	"The output response must be in format:\n'<type>(<scope>): <commit message>'. the scope should always be the 'name' value from the nearest project.json file, if it exists. Otherwise, use the name of the directory that holds the nearest 'package.json' file.",
+	specifyCommitFormat(type),
 ]
 	.filter(Boolean)
 	.join('\n');
