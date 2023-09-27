@@ -8,15 +8,18 @@
 		"commit"
 	],
 	"license": "MIT",
-	"repository": "rconjoe/aicommits",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/rconjoe/aicommits.git"
+	},
 	"author": "Hassan El Mghari (@nutlope), Joe Carlton<@rconjoe>",
 	"type": "module",
 	"files": [
 		"dist"
 	],
 	"bin": {
-		"aicommits": "./dist/cli.mjs",
-		"aic": "./dist/cli.mjs"
+		"aicommits": "dist/cli.mjs",
+		"aic": "dist/cli.mjs"
 	},
 	"scripts": {
 		"prepare": "simple-git-hooks",
